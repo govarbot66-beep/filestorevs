@@ -1,5 +1,5 @@
-# Don't Remove Credit @All_animes_in_telugu_Go
-# Ask Doubt on telegram @All_animes_in_telugu_Go
+# Don't Remove Credit @ind_gamer_1
+# Ask Doubt on telegram @ind_gamer_1
 #
 # Copyright (C) 2025 by Codeflix-Bots@Github, < https://github.com/Codeflix-Bots >.
 #
@@ -132,10 +132,9 @@ async def start_command(client: Client, message: Message):
                     [InlineKeyboardButton("• ᴍᴏʀᴇ ᴄʜᴀɴɴᴇʟs •", url="https://t.me/All_animes_in_teluguu_vs")],
 
     [
-                    
-    InlineKeyboardButton("• ᴀʙᴏᴜᴛ", callback_data = "about"),
-                    InlineKeyboardButton("• ʜᴇʟᴘ •", callback_data = "help")
-            
+                    InlineKeyboardButton("• ᴀʙᴏᴜᴛ", callback_data = "about"),
+                    InlineKeyboardButton('ʜᴇʟᴘ •', callback_data = "help")
+
     ]
             ]
         )
@@ -149,7 +148,7 @@ async def start_command(client: Client, message: Message):
                 id=message.from_user.id
             ),
             reply_markup=reply_markup,
-            message_effect_id=5104841246999180586)  # ❄️
+            message_effect_id=5104841245755180586)  # 🔥
         
         return
 
