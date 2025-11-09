@@ -129,15 +129,10 @@ async def start_command(client: Client, message: Message):
     else:
         reply_markup = InlineKeyboardMarkup(
             [
-                    [InlineKeyboardButton("• ᴍᴏʀᴇ ᴄʜᴀɴɴᴇʟs •", url="https://t.me/All_animes_in_teluguu_vs")],
-
-
+                [InlineKeyboardButton("• ᴍᴏʀᴇ ᴄʜᴀɴɴᴇʟs •", url="https://t.me/All_animes_in_teluguu_vs")],
+                [InlineKeyboardButton('❄️ ᴀʙᴏᴜᴛ', callback_data='about'), InlineKeyboardButton('❗ ʜᴇʟᴘ', callback_data='help')]
             ]
         )
-        [
-        InlineKeyboardButton('❄️ ᴀʙᴏᴜᴛ', callback_data='about'),
-        InlineKeyboardButton('❗ ʜᴇʟᴘ', callback_data='help')
-        ]
         await message.reply_photo(
             photo=START_PIC,
             caption=START_MSG.format(
@@ -274,3 +269,61 @@ async def schedule_auto_delete(client, codeflix_msgs, notification_msg, file_aut
         )
     except Exception as e:
         print(f"Error updating notification with 'Get File Again' button: {e}")
+
+# ================= Callback Query Handlers for About and Help ================= #
+
+@Bot.on_callback_query(filters.regex('about'))
+async def about_handler(client: Client, callback_query: CallbackQuery):
+    await callback_query.answer()  # Acknowledge callback to remove loading state
+    await callback_query.message.edit_text(
+        text=(
+            "<b>About This Bot</b>\n\n"
+            "This bot is created by @ind_gamer_1.\n"
+            "It helps you get files easily from channels.\n"
+            "Feel free to contact support for help."
+        ),
+        reply_markup=InlineKeyboardMarkup(
+            [[InlineKeyboardButton("Back", callback_data="start_back")]]
+        ),
+        parse_mode=ParseMode.HTML
+    )
+
+@Bot.on_callback_query(filters.regex('help'))
+async def help_handler(client: Client, callback_query: CallbackQuery):
+    await callback_query.answer()
+    await callback_query.message.edit_text(
+        text=(
+            "<b>Help Section</b>\n\n"
+            "• Use /start to begin.\n"
+            "• Subscribe to required channels.\n"
+            "• Send valid commands as per instructions.\n"
+            "For more info contact support."
+        ),
+        reply_markup=InlineKeyboardMarkup(
+            [[InlineKeyboardButton("Back", callback_data="start_back")]]
+        ),
+        parse_mode=ParseMode.HTML
+    )
+
+@Bot.on_callback_query(filters.regex('start_back'))
+async def start_back_handler(client: Client, callback_query: CallbackQuery):
+    await callback_query.answer()
+    user = callback_query.from_user
+    reply_markup = InlineKeyboardMarkup(
+        [
+            [InlineKeyboardButton("• ᴍᴏʀᴇ ᴄʜᴀɴɴᴇʟs •", url="https://t.me/All_animes_in_teluguu_vs")],
+            [InlineKeyboardButton('❄️ ᴀʙᴏᴜᴛ', callback_data='about'), InlineKeyboardButton('❗ ʜᴇʟᴘ', callback_data='help')]
+        ]
+    )
+    await callback_query.message.edit_media(
+        media=callback_query.message.photo,
+        caption=START_MSG.format(
+            first=user.first_name,
+            last=user.last_name,
+            username=None if not user.username else '@' + user.username,
+            mention=user.mention,
+            id=user.id
+        ),
+        reply_markup=reply_markup,
+        parse_mode=ParseMode.HTML
+        )
