@@ -275,17 +275,29 @@ async def schedule_auto_delete(client, codeflix_msgs, notification_msg, file_aut
 @Bot.on_callback_query(filters.regex('about'))
 async def about_handler(client: Client, callback_query: CallbackQuery):
     await callback_query.answer()  # Acknowledge callback to remove loading state
+    about_text = """
+<b>🤖 About This Bot</b>
+
+This bot is developed by <a href='https://t.me/ind_gamer_1'>@ind_gamer_1</a>.
+
+✨ <b>Features:</b>
+• Quickly fetch files from your favorite Telegram channels.
+• Auto-deletes files after a set time to save space.
+• Supports force subscription to channels before use.
+• Custom captions for files.
+
+📬 For support or inquiries, contact: <a href='https://t.me/ind_gamer_1'>@ind_gamer_1</a>
+
+Thank you for using this bot! ❤️
+"""
+
     await callback_query.message.edit_text(
-        text=(
-            "<b>About This Bot</b>\n\n"
-            "This bot is created by @ind_gamer_1.\n"
-            "It helps you get files easily from channels.\n"
-            "Feel free to contact support for help."
-        ),
+        text=about_text,
         reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton("Back", callback_data="start_back")]]
+            [[InlineKeyboardButton("⬅️ Back", callback_data="start_back")]]
         ),
-        parse_mode=ParseMode.HTML
+        parse_mode=ParseMode.HTML,
+        disable_web_page_preview=True
     )
 
 @Bot.on_callback_query(filters.regex('help'))
@@ -326,4 +338,4 @@ async def start_back_handler(client: Client, callback_query: CallbackQuery):
         ),
         reply_markup=reply_markup,
         parse_mode=ParseMode.HTML
-        )
+)
