@@ -131,13 +131,13 @@ async def start_command(client: Client, message: Message):
             [
                     [InlineKeyboardButton("• ᴍᴏʀᴇ ᴄʜᴀɴɴᴇʟs •", url="https://t.me/All_animes_in_teluguu_vs")],
 
-    [
-                    InlineKeyboardButton("• ᴀʙᴏᴜᴛ", callback_data = "about"),
-                    InlineKeyboardButton('ʜᴇʟᴘ •', callback_data = "help")
 
-    ]
             ]
         )
+        [
+        InlineKeyboardButton('❄️ ᴀʙᴏᴜᴛ', callback_data='about'),
+        InlineKeyboardButton('❗ ʜᴇʟᴘ', callback_data='help')
+    ]])
         await message.reply_photo(
             photo=START_PIC,
             caption=START_MSG.format(
