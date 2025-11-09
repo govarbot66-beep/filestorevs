@@ -137,7 +137,7 @@ async def start_command(client: Client, message: Message):
         [
         InlineKeyboardButton('❄️ ᴀʙᴏᴜᴛ', callback_data='about'),
         InlineKeyboardButton('❗ ʜᴇʟᴘ', callback_data='help')
-    ]])
+        ]
         await message.reply_photo(
             photo=START_PIC,
             caption=START_MSG.format(
